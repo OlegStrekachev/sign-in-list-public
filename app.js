@@ -33,7 +33,6 @@ expressApp.use(
 //   res.sendFile(path.join(__dirname, "public", "kidstable.html"));
 // });
 
-
 expressApp.use("/api", router);
 
 export default expressApp;
