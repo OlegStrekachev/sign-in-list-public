@@ -105,25 +105,51 @@ export const getFullList = async (req, res) => {
 };
 
 export const webHookDeploy = async (req, res) => {
-  const githubSignature256 = req.headers['x-hub-signature-256'];
-  const payload = req.rawBody;
-  const secret = process.env.GITHUB_WEBHOOK_SECRET;
+  try {
+    // Log the request headers for debugging purposes
+    console.log("Headers:", req.headers);
 
-  const computedSignature256 = 'sha256=' + crypto.createHmac('sha256', secret).update(payload, 'utf-8').digest('hex');
+    const githubSignature256 = req.headers['x-hub-signature-256'];
+    const payload = req.rawBody;
 
-  if (githubSignature256 !== computedSignature256) {
+    // Logging improved for better clarity
+    console.log('Received Github Signature:', githubSignature256);
+    console.log('Payload:', payload);
+
+    const secret = process.env.GITHUB_WEBHOOK_SECRET;
+    console.log('Webhook Secret:', secret);
+
+    if (!secret) {
+      console.error('GITHUB_WEBHOOK_SECRET is not set.');
+      return res.status(500).send('Server configuration error.');
+    }
+
+    const computedSignature256 = 'sha256=' + crypto.createHmac('sha256', secret).update(payload, 'utf-8').digest('hex');
+    console.log('Computed Signature:', computedSignature256);
+
+    if (githubSignature256 !== computedSignature256) {
       return res.status(403).send('Mismatched signatures');
-  }
+    }
 
-  // Execute the deployment script
-  exec('/opt/deploy.sh', (error, stdout, stderr) => {
+    // Respond immediately after verifying the webhook to avoid timeout issues
+    res.status(202).send('Webhook received and is being processed.');
+
+    // Execute the deployment script asynchronously
+    console.log('Starting deployment script execution...');
+    exec('/opt/deploy.sh', (error, stdout, stderr) => {
       if (error) {
-          console.error(`exec error: ${error}`);
-          return res.status(500).send('Deployment failed');
+        console.error(`Deployment script execution error: ${error}`);
+        console.error('Stderr:', stderr);
+        // No need to send a response here since we've already responded
+        return;
       }
-      console.log(stdout);
-      return res.status(200).send('Deployed successfully');
-  });
+      console.log('Deployment script stdout:', stdout);
+    });
+
+  } catch (error) {
+    console.error('Unexpected error:', error);
+    res.status(500).send('Unexpected server error.');
+  }
 };
 
 //cccfff
