@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+  webHookDeploy,
   sendMail,
   postNewKid,
   updateKidInfo,
@@ -17,5 +18,7 @@ router
   .delete(deleteKidInfo);
 
 router.post('/send-email', sendMail);
+
+router.post('/deploy', webHookDeploy);
 
 export default router;

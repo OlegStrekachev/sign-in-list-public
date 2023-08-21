@@ -1,6 +1,7 @@
 import Kid from './../models/newKidModel.js';
 import emailGenerator from './../nodemailer/nodemailer.js';
-import path from 'path';
+import crypto from 'crypto';
+import { exec } from 'child_process';
 
 
 export const sendMail = async (req, res) => {
@@ -101,4 +102,27 @@ export const getFullList = async (req, res) => {
       message: err,
     });
   }
+};
+
+export const webHookDeploy = async (req, res) => {
+  const githubSignature = req.headers['x-hub-signature'];
+  const payload = JSON.stringify(req.body);
+  const secret = process.env.GITHUB_WEBHOOK_SECRET;
+
+  const computedSignature = 'sha1=' + crypto.createHmac('sha1', secret).update(payload).digest('hex');
+
+  if (githubSignature !== computedSignature) {
+      return res.status(403).send('Mismatched signatures');
+  }
+
+  // Execute the deployment script
+  exec('/opt/deploy.sh', (error, stdout, stderr) => {
+      if (error) {
+          console.error(`exec error: ${error}`);
+          return res.status(500).send('Deployment failed');
+      }
+      console.log(stdout);
+      return res.status(200).send('Deployed successfully');
+  });
+
 };

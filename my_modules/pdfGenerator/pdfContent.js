@@ -186,3 +186,5 @@ async function generateDocumentDefinition(weektype) {
 }
 
 export default generateDocumentDefinition;
+
+
