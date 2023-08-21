@@ -111,7 +111,7 @@ export const webHookDeploy = async (req, res) => {
 
   const computedSignature256 = 'sha256=' + crypto.createHmac('sha256', secret).update(payload, 'utf-8').digest('hex');
 
-  if (githubSignature !== computedSignature) {
+  if (githubSignature256 !== computedSignature256) {
       return res.status(403).send('Mismatched signatures');
   }
 
