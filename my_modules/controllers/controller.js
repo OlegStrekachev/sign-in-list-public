@@ -124,5 +124,4 @@ export const webHookDeploy = async (req, res) => {
       console.log(stdout);
       return res.status(200).send('Deployed successfully');
   });
-
 };
