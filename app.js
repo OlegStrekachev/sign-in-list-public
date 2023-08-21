@@ -14,7 +14,6 @@ db.once("open", () => {
 
 const __dirname = path.resolve();
 
-
 import router from "./my_modules/router/router.js";
 
 // Middleware
@@ -28,7 +27,6 @@ expressApp.use(
 );
 
 // expressApp.use(express.static("public"));
-
 // expressApp.get("/kidstable", async (req, res) => {
 //   res.sendFile(path.join(__dirname, "public", "kidstable.html"));
 // });
@@ -36,4 +34,3 @@ expressApp.use(
 expressApp.use("/api", router);
 
 export default expressApp;
-
