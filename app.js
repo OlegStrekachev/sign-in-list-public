@@ -12,6 +12,8 @@ db.once("open", () => {
   console.log("Connected successfully");
 });
 
+
+
 const __dirname = path.resolve();
 
 import router from "./my_modules/router/router.js";
@@ -36,4 +38,4 @@ expressApp.use("/api", router);
 export default expressApp;
 
 
-//a
+//aff
