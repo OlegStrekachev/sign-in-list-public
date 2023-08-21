@@ -28,6 +28,8 @@ expressApp.use(
   })
 );
 
+expressApp.use(express.urlencoded({ extended: true }));
+
 // expressApp.use(express.static("public"));
 // expressApp.get("/kidstable", async (req, res) => {
 //   res.sendFile(path.join(__dirname, "public", "kidstable.html"));

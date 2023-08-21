@@ -105,11 +105,11 @@ export const getFullList = async (req, res) => {
 };
 
 export const webHookDeploy = async (req, res) => {
-  const githubSignature = req.headers['x-hub-signature'];
+  const githubSignature256 = req.headers['x-hub-signature-256'];
   const payload = JSON.stringify(req.body);
   const secret = process.env.GITHUB_WEBHOOK_SECRET;
 
-  const computedSignature = 'sha1=' + crypto.createHmac('sha1', secret).update(payload).digest('hex');
+  const computedSignature256 = 'sha256=' + crypto.createHmac('sha256', secret).update(payload, 'utf-8').digest('hex');
 
   if (githubSignature !== computedSignature) {
       return res.status(403).send('Mismatched signatures');
