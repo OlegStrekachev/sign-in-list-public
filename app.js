@@ -4,6 +4,19 @@ import express from "express";
 import mongoose from "mongoose";
 
 const expressApp = express();
+expressApp.use((req, res, next) => {
+  req.rawBody = "";
+  req.setEncoding("utf8");
+
+  req.on("data", (chunk) => {
+    req.rawBody += chunk;
+  });
+
+  req.on("end", () => {
+    next();
+  });
+});
+
 expressApp.use(express.json());
 
 const db = mongoose.connection;
@@ -11,8 +24,6 @@ db.on("error", console.error.bind(console, "connection error: "));
 db.once("open", () => {
   console.log("Connected successfully");
 });
-
-
 
 const __dirname = path.resolve();
 
@@ -28,8 +39,6 @@ expressApp.use(
   })
 );
 
-expressApp.use(express.urlencoded({ extended: true }));
-
 // expressApp.use(express.static("public"));
 // expressApp.get("/kidstable", async (req, res) => {
 //   res.sendFile(path.join(__dirname, "public", "kidstable.html"));
@@ -38,6 +47,5 @@ expressApp.use(express.urlencoded({ extended: true }));
 expressApp.use("/api", router);
 
 export default expressApp;
-
 
 //affgggfwe

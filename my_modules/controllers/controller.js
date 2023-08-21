@@ -106,7 +106,7 @@ export const getFullList = async (req, res) => {
 
 export const webHookDeploy = async (req, res) => {
   const githubSignature256 = req.headers['x-hub-signature-256'];
-  const payload = JSON.stringify(req.body);
+  const payload = req.rawBody;
   const secret = process.env.GITHUB_WEBHOOK_SECRET;
 
   const computedSignature256 = 'sha256=' + crypto.createHmac('sha256', secret).update(payload, 'utf-8').digest('hex');
