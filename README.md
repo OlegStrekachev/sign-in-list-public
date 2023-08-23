@@ -97,7 +97,7 @@ To set up the webhook:
 7. Create a bash script on your server:
    
 ```
-!/bin/bash
+#!/bin/bash
 cd /opt/path-to-your-project
 git pull origin name-of-your-branch
 npm install
