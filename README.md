@@ -7,6 +7,8 @@ A web-based platform designed to manage a list of kids in a daycare setting, off
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Installation and Setup](#installation-and-setup)
+    - [Frontend](#frontend)
+    - [Backend](#backend)
 - [Usage](#usage)
 - [Continuous Deployment](#continuous-deployment)
 - [Contribute](#contribute)
@@ -27,6 +29,18 @@ A web-based platform designed to manage a list of kids in a daycare setting, off
 - **Libraries & Packages:** pdfMaker, Nodemailer
 
 ## Installation and Setup
+
+### Frontend
+
+1. **Copy Static Website Folder**
+
+   Transfer the static website folder to your desired server location.
+
+2. **Serve the Website**
+
+   Use a web server tool of your choice to serve the static website to the client. Examples include Apache, Nginx, or any static site hosting service.
+
+### Backend
 
 1. **Clone the Repository**
 
@@ -64,13 +78,13 @@ A web-based platform designed to manage a list of kids in a daycare setting, off
 
 ## Usage
 
-- Navigate to `http://localhost:[YOUR PORT]` in your web browser.
+- Navigate to `http://localhost:[YOUR PORT]` in your web browser for the backend.
 - Use the web interface to perform CRUD operations on the kids' list.
 - To generate and print the weekly sign-in sheets, click the `Print` button.
 
 ## Continuous Deployment
 
-This project uses GitHub Webhooks to achieve continuous deployment. Any pushes to the master branch automatically trigger a Bash script, pulling the latest changes and restarting the application using PM2. 
+This project uses GitHub Webhooks to achieve continuous deployment. Any pushes to the master branch automatically trigger a Bash script, pulling the latest changes and restarting the application using PM2.
 
 To set up the webhook:
 
