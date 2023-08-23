@@ -4,7 +4,10 @@ import express from "express";
 import mongoose from "mongoose";
 
 const expressApp = express();
-expressApp.use((req, res, next) => {
+
+expressApp.use(express.json());
+
+expressApp.use("/api/deploy", (req, res, next) => {
   req.rawBody = "";
   req.setEncoding("utf8");
 
@@ -17,8 +20,6 @@ expressApp.use((req, res, next) => {
   });
 });
 
-expressApp.use(express.json());
-
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error: "));
 db.once("open", () => {
@@ -29,8 +30,6 @@ const __dirname = path.resolve();
 
 import router from "./my_modules/router/router.js";
 
-// Middleware
-
 expressApp.use(
   cors({
     origin: "*",
@@ -39,13 +38,6 @@ expressApp.use(
   })
 );
 
-// expressApp.use(express.static("public"));
-// expressApp.get("/kidstable", async (req, res) => {
-//   res.sendFile(path.join(__dirname, "public", "kidstable.html"));
-// });
-
 expressApp.use("/api", router);
 
 export default expressApp;
-
-
