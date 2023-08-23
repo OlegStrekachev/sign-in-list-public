@@ -1,4 +1,4 @@
-# Daycare Management System
+# Daycare sign in list printing automatization system
 
 A web-based platform designed to manage a list of kids in a daycare setting, offering CRUD operations, and automated sign-in sheet generation with printing capabilities.
 
