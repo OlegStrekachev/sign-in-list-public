@@ -95,11 +95,12 @@ To set up the webhook:
 5. Set the secret and use the same in your deployment script for validation.
 6. Create a bash script on your server:
 
-```#!/bin/bash
+```!/bin/bash
 cd /opt/kids-list
 git pull origin master
 npm install
-pm2 restart kids-list```
+pm2 restart kids-list
+```
 
 7. Select "Just the push event."
 8. Ensure the webhook is active.
