@@ -93,16 +93,17 @@ To set up the webhook:
 3. Add a new webhook with the Payload URL pointing to your deployment server.
 4. Choose content type as `application/json`.
 5. Set the secret and use the same in your deployment script for validation.
-6. Create a bash script on on your server
-   
-```#!/bin/bash
+6. Create a bash script on your server:
+
+#!/bin/bash
 cd /opt/kids-list
 git pull origin master
 npm install
-pm2 restart kids-list```
+pm2 restart kids-list
 
-8. Select "Just the push event."
-9. Ensure the webhook is active.
+7. Select "Just the push event."
+8. Ensure the webhook is active.
+
 
 ## Contribute
 
