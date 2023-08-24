@@ -34,7 +34,7 @@ A web-based platform designed to manage a list of kids in a daycare setting, off
 
 1. **Copy Static Website Folder**
 
-   Transfer the static website folder to your desired server location.
+   Transfer the static website folder "front-end-table" to your desired server location.
 
 2. **Serve the Website**
 
