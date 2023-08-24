@@ -14,7 +14,7 @@
   "name": "kids-list",
   "version": "1.0.0",
   "type": "module",
-  "description": "Sending sign in list to a printer",
+  "description": "Creating a sign in list using MongoDB data and sending it to the remote printer via email",
   "main": "app.js",
   "scripts": {
     "start": "nodemon server.js"
