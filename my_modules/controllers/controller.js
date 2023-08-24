@@ -19,9 +19,7 @@ export const postNewKid = async (req, res) => {
   console.log(req.method);
   console.log("HELLO", req.body);
   try {
-    // const newTour = new Tour({})
-    // newTour.save()
-
+ 
     const newKid = await Kid.create(req.body);
 
     res.status(201).json({
@@ -109,12 +107,17 @@ export const webHookDeploy = async (req, res) => {
     // Log the request headers for debugging purposes
     console.log("Headers:", req.headers);
 
+    // Get the Github signature for comparison
     const githubSignature256 = req.headers['x-hub-signature-256'];
+
+    // Get the raw body of the request for comparison
     const payload = req.rawBody;
 
     // Logging improved for better clarity
     console.log('Received Github Signature:', githubSignature256);
     console.log('Payload:', payload);
+
+    // Get the webhook secret from the environment variables
 
     const secret = process.env.GITHUB_WEBHOOK_SECRET;
     console.log('Webhook Secret:', secret);
@@ -124,8 +127,12 @@ export const webHookDeploy = async (req, res) => {
       return res.status(500).send('Server configuration error.');
     }
 
+    // Compute the signature on the request payload using the webhook secret
+
     const computedSignature256 = 'sha256=' + crypto.createHmac('sha256', secret).update(payload, 'utf-8').digest('hex');
     console.log('Computed Signature:', computedSignature256);
+
+    // Terminating the execution of the route handler if signatures don't match
 
     if (githubSignature256 !== computedSignature256) {
       return res.status(403).send('Mismatched signatures');
@@ -136,6 +143,9 @@ export const webHookDeploy = async (req, res) => {
 
     // Execute the deployment script asynchronously
     console.log('Starting deployment script execution...');
+
+    // The deployment script is located at /opt/deploy.sh, change the path if needed
+
     exec('/opt/deploy.sh', (error, stdout, stderr) => {
       if (error) {
         console.error(`Deployment script execution error: ${error}`);
