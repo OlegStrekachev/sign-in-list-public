@@ -38,8 +38,13 @@ A web-based platform designed to manage a list of kids in a daycare setting, off
 1. **Copy Static Website Folder**
    Transfer the static website folder "front-end-table" to your desired server location.
 
-2. **Serve the Website**
+2. **Ensure JS Fetch API Paths are Correct in the fetch.js Script**
+   The frontend table sends API requests to the backend, activating specific route handler functions. It's crucial to confirm that the frontend API calls align with your backend routes. Modify as necessary.
+
+3. **Serve the Website**
    Use a web server tool of your choice to serve the static website to the client. Examples include Apache, Nginx, or any static site hosting service.
+
+
 
 ### Backend
 
@@ -100,7 +105,7 @@ To set up the webhook:
 1. Navigate to your GitHub repository.
 2. Click on 'Settings', then 'Webhooks'.
 3. Add a new webhook with the Payload URL pointing to your deployment server route: `[YOUR_SERVER_URL]/deploy`.
-4. Choose content type as `application/json`.
+4. Choose content type as `application/x-www-form-urlencoded`.
 5. Set the secret and use the same in your deployment script for validation.
 6. Select "Just the push event."
 
