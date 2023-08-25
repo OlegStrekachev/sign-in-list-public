@@ -45,7 +45,7 @@ const emailGenerator = async (weektype) => {
       const mailOptions = {
         from: "sendtoprintmotherschoice@gmail.com",
         // to: "926xxmdm326tqg@hpeprint.com",
-        to: process.env.DEVELOPMENT_EMAIL,
+        to: process.env.REMOTE_PRINTER_EMAIL,
         subject: "Sending Email with PDF Attachment using Node.js",
         text: "Check out the attached PDF!",
         attachments: [
