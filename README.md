@@ -3,15 +3,15 @@
 A web-based platform designed to manage a list of kids in a daycare setting, offering CRUD operations, and automated sign-in sheet generation with printing capabilities.
 
 | <img src="https://drive.google.com/uc?export=view&id=11Rl3u4qQ8gMo0rXjQ0Gvr6fhEGNh0B5H" width="300"> | <img src="https://drive.google.com/uc?export=view&id=17UD9V2XnQCL3_PCCHxx4Uj90N_-9iHop" width="300"> |
-|:---:|:---:|
+| :--------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------: |
 
 ## Table of Contents
 
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Installation and Setup](#installation-and-setup)
-    - [Frontend](#frontend)
-    - [Backend](#backend)
+  - [Frontend](#frontend)
+  - [Backend](#backend)
 - [Usage](#usage)
 - [Continuous Deployment](#continuous-deployment)
 - [Contribute](#contribute)
@@ -44,36 +44,40 @@ A web-based platform designed to manage a list of kids in a daycare setting, off
 3. **Serve the Website**
    Use a web server tool of your choice to serve the static website to the client. Examples include Apache, Nginx, or any static site hosting service.
 
-
-
 ### Backend
 
 1. **Clone the Repository**
+
    ```
    git clone [YOUR REPO LINK]
    ```
 
 2. **Navigate to Project Directory**
+
    ```
    cd [YOUR PROJECT NAME]
    ```
 
 3. **Install Required Dependencies**
+
    ```
    npm install
    ```
 
 4. **Setup Environment Variables**
    Create a `.env` file in the root directory and provide values for:
+
    ```env
-   # Port expressApp running on
-   PORT=your_express_port
+   # Host and Port expressApp running on
+   EXPRESS_PORT=your_port
+   EXPRESS_HOST=your_host
 
-   # Address mongoDB is running on
-   MONGODB_URI=your_connection_URI
+   # remote printer email
+   REMOTE_PRINTER_EMAIL="your_remote_printer_email"
+   DEVELOPMENT_EMAIL="your_development_email"
 
-   # Root folder for the Project
-   ROOT_FOLDER=your_root_folder
+   # mongoDB connection
+   MONGODB_URL_DEV=your_mongoDB_connection_string
 
    # Nodemailer login and pass for the email
    NODEMAILER_USER=your_email_login
@@ -81,12 +85,10 @@ A web-based platform designed to manage a list of kids in a daycare setting, off
 
    # Nodemailer email
    NODEMAILER_EMAIL_FROM=email_you_sending_from
-   NODEMAILER_EMAIL_TO=email_you_sending_to
+
    ```
 
-
 5. **Initialize and Run the MongoDB Server**
-  
 
 6. **Start the Application**
    ```
@@ -96,6 +98,7 @@ A web-based platform designed to manage a list of kids in a daycare setting, off
 ## Usage
 
 All the functionality is accessible from the front end web page table. Clients can perform the following actions:
+
 - Create a new record.
 - Edit an existing record.
 - Delete an existing record.
@@ -106,6 +109,7 @@ All the functionality is accessible from the front end web page table. Clients c
 This project uses GitHub Webhooks to achieve continuous deployment. Any pushes to the master branch automatically trigger a Bash script, pulling the latest changes and restarting the application using PM2.
 
 To set up the webhook:
+
 1. Navigate to your GitHub repository.
 2. Click on 'Settings', then 'Webhooks'.
 3. Add a new webhook with the Payload URL pointing to your deployment server route: `[YOUR_SERVER_URL]/deploy`.
@@ -114,6 +118,7 @@ To set up the webhook:
 6. Select "Just the push event."
 
 7. Create a bash script on your server:
+
    ```bash
    #!/bin/bash
    cd /opt/path-to-your-project
