@@ -84,7 +84,11 @@ A web-based platform designed to manage a list of kids in a daycare setting, off
    NODEMAILER_EMAIL_TO=email_you_sending_to
    ```
 
-5. **Start the Application**
+
+5. **Initialize and Run the MongoDB Server**
+  
+
+6. **Start the Application**
    ```
    npm start
    ```
